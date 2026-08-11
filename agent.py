@@ -1,11 +1,13 @@
-import os
+import streamlit as st
 from google import genai
 
-# Initialize the standard Gemini client
-# Streamlit will automatically use the GOOGLE_API_KEY from your Secrets
-client = genai.Client()
+# Explicitly grab the API key from Streamlit Secrets
+api_key = st.secrets["GOOGLE_API_KEY"]
 
-# Start a chat session with the system instructions
+# Initialize the client using that specific key
+client = genai.Client(api_key=api_key)
+
+# Start a chat session
 chat = client.chats.create(
     model="gemini-1.5-flash",
     config={
