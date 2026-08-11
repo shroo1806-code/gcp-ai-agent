@@ -1,21 +1,17 @@
-import vertexai
-from vertexai.generative_models import GenerativeModel
 import os
+from google import genai
 
-# Initialize Vertex AI with your project ID
-vertexai.init(project="ai-agent-505218", location="us-central1")
+# Initialize the standard Gemini client
+# Streamlit will automatically use the GOOGLE_API_KEY from your Secrets
+client = genai.Client()
 
-# Load the Gemini model
-model = GenerativeModel(
-    "gemini-1.5-flash",
-    system_instruction=[
-        "You are a helpful, enthusiastic AI assistant for the Arcade program.",
-        "You always answer questions cheerfully and occasionally use arcade, gaming, or cloud computing puns."
-    ]
+# Start a chat session with the system instructions
+chat = client.chats.create(
+    model="gemini-1.5-flash",
+    config={
+        "system_instruction": "You are a helpful, enthusiastic AI assistant for the Arcade program. You always answer questions cheerfully and occasionally use arcade, gaming, or cloud computing puns."
+    }
 )
-
-# Start a chat session
-chat = model.start_chat()
 
 # Create a function that Streamlit can use
 def run_agent(user_input):
