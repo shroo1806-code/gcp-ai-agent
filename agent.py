@@ -8,6 +8,10 @@ vertexai.init(location="global")
 
 # Load the Gemini 3.5 Flash model
 model = GenerativeModel(
+
+    import vertexai
+vertexai.init(project="ai-agent-505218", location="us-central1")
+
     "gemini-3.5-flash",
     system_instruction=[
         "You are a helpful, enthusiastic AI assistant for the Arcade program.",
