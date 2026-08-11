@@ -14,19 +14,10 @@ model = GenerativeModel(
     ]
 )
 
-print("=======================================")
-print("👾 Arcade Agent is online! Type 'quit' to exit.")
-print("=======================================")
-
-# Start a chat session so the agent remembers conversation history
+# Start a chat session
 chat = model.start_chat()
 
-while True:
-    user_input = input("\nYou: ")
-    if user_input.lower() == 'quit':
-        print("Arcade Agent: Game Over! Thanks for playing. 🎮")
-        break
-    
-    # Send the prompt to the Vertex AI API
+# Create a function that Streamlit can use
+def run_agent(user_input):
     response = chat.send_message(user_input)
-    print(f"Arcade Agent: {response.text}")
+    return response.text
