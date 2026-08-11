@@ -2,17 +2,12 @@ import vertexai
 from vertexai.generative_models import GenerativeModel
 import os
 
-# Initialize Vertex AI 
-# Updated to 'global' to support the latest Gemini 3.5 Flash model
-vertexai.init(location="global")
-
-# Load the Gemini 3.5 Flash model
-model = GenerativeModel(
-
-    import vertexai
+# Initialize Vertex AI with your project ID
 vertexai.init(project="ai-agent-505218", location="us-central1")
 
-    "gemini-3.5-flash",
+# Load the Gemini model
+model = GenerativeModel(
+    "gemini-1.5-flash",
     system_instruction=[
         "You are a helpful, enthusiastic AI assistant for the Arcade program.",
         "You always answer questions cheerfully and occasionally use arcade, gaming, or cloud computing puns."
