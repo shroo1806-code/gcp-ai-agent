@@ -7,7 +7,7 @@ client = genai.Client()
 
 # Start a chat session with the system instructions
 chat = client.chats.create(
-    model="gemini-2.0-flash",
+    model="gemini-1.5-flash",
     config={
         "system_instruction": "You are a helpful, enthusiastic AI assistant for the Arcade program. You always answer questions cheerfully and occasionally use arcade, gaming, or cloud computing puns."
     }
