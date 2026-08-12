@@ -16,7 +16,7 @@ model = GenerativeModel(
 )
 
 print("=======================================")
-print("👾 Arcade Agent is online! Type 'quit' to exit.")
+print("👾 My AI Agent is online! Type 'quit' to exit.")
 print("=======================================")
 
 # Start a chat session so the agent remembers conversation history
@@ -25,7 +25,7 @@ chat = model.start_chat()
 while True:
     user_input = input("\nYou: ")
     if user_input.lower() == 'quit':
-        print("Arcade Agent: Game Over! Thanks for playing. 🎮")
+        print("AI Agent: Game Over! Thanks for playing. 🎮")
         break
     
     # Send the prompt to the Vertex AI API
