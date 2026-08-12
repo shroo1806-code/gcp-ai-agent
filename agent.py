@@ -1,21 +1,33 @@
-import streamlit as st
-from google import genai
+import vertexai
+from vertexai.generative_models import GenerativeModel
+import os
 
-# Explicitly grab the API key from Streamlit Secrets
-api_key = st.secrets["GOOGLE_API_KEY"]
+# Initialize Vertex AI 
+# Updated to 'global' to support the latest Gemini 3.5 Flash model
+vertexai.init(location="global")
 
-# Initialize the client using that specific key
-client = genai.Client(api_key=api_key)
-
-# Start a chat session
-chat = client.chats.create(
-    model="gemini-1.5-flash",
-    config={
-        "system_instruction": "You are a helpful, enthusiastic AI assistant for the Arcade program. You always answer questions cheerfully and occasionally use arcade, gaming, or cloud computing puns."
-    }
+# Load the Gemini 3.5 Flash model
+model = GenerativeModel(
+    "gemini-3.5-flash",
+    system_instruction=[
+        "You are a helpful, enthusiastic AI assistant for the Arcade program.",
+        "You always answer questions cheerfully and occasionally use arcade, gaming, or cloud computing puns."
+    ]
 )
 
-# Create a function that Streamlit can use
-def run_agent(user_input):
+print("=======================================")
+print("👾 Arcade Agent is online! Type 'quit' to exit.")
+print("=======================================")
+
+# Start a chat session so the agent remembers conversation history
+chat = model.start_chat()
+
+while True:
+    user_input = input("\nYou: ")
+    if user_input.lower() == 'quit':
+        print("Arcade Agent: Game Over! Thanks for playing. 🎮")
+        break
+    
+    # Send the prompt to the Vertex AI API
     response = chat.send_message(user_input)
-    return response.text
+    print(f"Arcade Agent: {response.text}")
